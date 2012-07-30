@@ -234,7 +234,7 @@ int _tmain(int argc, char* argv[])
 	
 	// At this point we have all the eval params ... right?
 	// Now try to split this.
-	simulateFromParams(pEvalParams);
+	simulateFromEvalParams(pEvalParams);
 	// End of split.
 
 	UnmapViewOfFile(pEvalParams);
