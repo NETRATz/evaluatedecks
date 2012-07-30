@@ -89,7 +89,10 @@ void simulateFromEvalParams(EVAL_PARAMS * const pEvalParams)
 			for (SCID::iterator si = CardPool.begin(); si != CardPool.end(); si++)
 			{
 				while ((si != CardPool.end()) && (DB.GetCard(*si).GetType() != TYPE_COMMANDER))
-					si = CardPool.erase(si);
+				    // That code is broken... set::iterator::erase does not return an iterator
+					//si = CardPool.erase(si);
+					// ... lets try this
+					CardPool.erase(si++);
 				if (si == CardPool.end())
 					break;
 			}
@@ -123,7 +126,9 @@ void simulateFromEvalParams(EVAL_PARAMS * const pEvalParams)
 			// remove all commander cards from pool
 			for (SCID::iterator si = CardPool.begin(); si != CardPool.end(); si++)
 				while ((si != CardPool.end()) && (DB.GetCard(*si).GetType() == TYPE_COMMANDER))
-					si = CardPool.erase(si);
+				    // same problem here
+					// si = CardPool.erase(si);
+					CardPool.erase(si++);
 			// card in deck
 			for (VCARDS::iterator vi=X.Deck.begin();vi!=X.Deck.end();vi++)
 				if (vi->GetId() == pEvalParams->WildcardId)
@@ -228,7 +233,9 @@ void simulateFromEvalParams(EVAL_PARAMS * const pEvalParams)
 				}
 				RID.insert(PRID(lresult.Win,mi->second));
 				pEvalParams->FullAmountOfGames += lresult.Games;
-				mi = RID.erase(mi); // insert then erase?
+				// and here again
+				//mi = RID.erase(mi); // insert then erase?
+				RID.erase(mi++);
 				i++;
 			}
 			i = 0;
