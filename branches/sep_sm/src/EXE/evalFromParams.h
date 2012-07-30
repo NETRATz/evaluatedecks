@@ -1,4 +1,12 @@
 
+struct more
+{
+    bool operator()(const UINT a, const UINT b) const
+    {
+    return a > b;
+    }
+};
+
 void simulateFromEvalParams(EVAL_PARAMS * const pEvalParams)
 {
 
@@ -43,13 +51,7 @@ void simulateFromEvalParams(EVAL_PARAMS * const pEvalParams)
 	{
 		SCID CardPool;
 		SCID xCardPool;
-		struct more
-		{
-		  bool operator()(const UINT a, const UINT b) const
-		  {
-			return a > b;
-		  }
-		};
+
 		typedef multimap<UINT,UINT, more> MRID;
 		typedef pair<UINT,UINT> PRID;
 		MRID RID;
